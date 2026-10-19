@@ -1,16 +1,18 @@
 
 pipeline {
-    agent {
-        docker {
-            image 'node:22-alpine'
-            args '-u root'
-        }
-    }
+    agent any
 
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
+            }
+        }
+
+        stage('Verify Environment') {
+            steps {
+                sh 'node --version'
+                sh 'npm --version'
             }
         }
 
